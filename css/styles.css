@@ -64,7 +64,7 @@ button:hover:not(:disabled) {
 }
 
 button:focus {
-  outline: 2px solid var(--color-start);
+  outline: 2px solid var(--color-neutral);
   outline-offset: 2px;
 }
 
