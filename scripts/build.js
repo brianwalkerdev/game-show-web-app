@@ -16,7 +16,7 @@ const itemsToCopy = [
   'index.html',
   'css',
   'js',
-  'images'
+  'assets/images'
 ];
 
 // Create dist directory
