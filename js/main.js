@@ -163,20 +163,22 @@ function initGame() {
   qwerty.addEventListener("click", handleLetterClick);
   
   // Add keyboard support
-  document.addEventListener("keydown", (e) => {
-    const key = e.key.toLowerCase();
-    if (/^[a-z]$/.test(key)) {
-      const button = document.querySelector(`#qwerty button:not(.chosen):not([disabled])`);
-      const allButtons = document.querySelectorAll("#qwerty button");
-      for (let btn of allButtons) {
-        if (btn.textContent === key && !btn.disabled) {
-          btn.click();
-          break;
-        }
-      }
-    }
-  });
+  // Keyboard support moved outside to prevent duplicate listeners
 }
 
 // Start the game when the page loads
 initGame();
+
+// Add keyboard support (only once)
+document.addEventListener("keydown", (e) => {
+  const key = e.key.toLowerCase();
+  if (/^[a-z]$/.test(key)) {
+    const allButtons = document.querySelectorAll("#qwerty button");
+    for (let btn of allButtons) {
+      if (btn.textContent === key && !btn.disabled) {
+        btn.click();
+        break;
+      }
+    }
+  }
+});
