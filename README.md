@@ -53,6 +53,7 @@ An interactive browser-based word guessing game where players reveal hidden phra
    npm start
    ```
 
+   > **Note:** The `npm start` command requires [Python 3](https://www.python.org/downloads/) to be installed on your system. If you don't have Python 3, you can either [install it](https://www.python.org/downloads/) or use another static server (such as [`http-server`](https://www.npmjs.com/package/http-server)), or simply open `index.html` directly in your browser.
 3. **Start playing!**
    - Click letters to guess
    - Or use your keyboard to type letters
