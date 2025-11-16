@@ -113,6 +113,10 @@ game-show-web-app/
 ├── images/
 │   ├── liveHeart.png   # Lives indicator (active)
 │   └── lostHeart.png   # Lives indicator (lost)
+├── screenshots/
+│   ├── thumbnail.png   # Project thumbnail
+│   ├── game-start.png  # Game start screen
+│   └── game-in-progress.png  # Gameplay screenshot
 ├── scripts/
 │   └── build.js        # Build script for deployment
 ├── package.json        # Project metadata
