@@ -55,6 +55,22 @@ button {
   -webkit-transition: var(--transition);
   -o-transition: var(--transition);
   transition: var(--transition);
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:focus {
+  outline: 2px solid var(--color-neutral);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .main-container {
@@ -118,11 +134,25 @@ button {
 }
 
 .btn__reset {
-  padding: 8px;
+  padding: 12px 24px;
   margin: 50px auto;
   background: #ffffff;
   border-radius: 5px;
   font-size: var(--font-size-medium);
+  font-weight: 500;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.btn__reset:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn__reset:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
 }
 
 /* Overlay */

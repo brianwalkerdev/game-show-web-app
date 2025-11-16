@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Wheel of Success!</title>
+    <title>Wheel of Success - Interactive Word Guessing Game</title>
+    <meta name="description" content="A fun browser-based word guessing game where players reveal hidden phrases by guessing letters. Test your skills with 5 chances to win!" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="word game, guessing game, hangman, phrase game, browser game" />
+    <meta name="author" content="Brian Walker" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,53 +18,53 @@
   </head>
   <body>
     <div class="main-container">
-      <div id="overlay" class="start">
-        <h2 class="title">Wheel of Success</h2>
-        <a class="btn__reset">Start Game</a>
+      <div id="overlay" class="start" role="dialog" aria-labelledby="overlay-title">
+        <h2 id="overlay-title" class="title">Wheel of Success</h2>
+        <button class="btn__reset" aria-label="Start new game">Start Game</button>
       </div>
 
       <div id="banner" class="section">
-        <h2 class="header">Wheel of Success</h2>
+        <h1 class="header">Wheel of Success</h1>
       </div>
 
-      <div id="phrase" class="section">
-        <ul></ul>
+      <div id="phrase" class="section" role="region" aria-label="Hidden phrase">
+        <ul aria-live="polite"></ul>
       </div>
-      <div id="qwerty" class="section">
+      <div id="qwerty" class="section" role="region" aria-label="On-screen keyboard">
         <div class="keyrow">
-          <button>q</button><button>w</button><button>e</button
-          ><button>r</button><button>t</button><button>y</button
-          ><button>u</button><button>i</button><button>o</button
-          ><button>p</button>
+          <button aria-label="Letter q">q</button><button aria-label="Letter w">w</button><button aria-label="Letter e">e</button
+          ><button aria-label="Letter r">r</button><button aria-label="Letter t">t</button><button aria-label="Letter y">y</button
+          ><button aria-label="Letter u">u</button><button aria-label="Letter i">i</button><button aria-label="Letter o">o</button
+          ><button aria-label="Letter p">p</button>
         </div>
         <div class="keyrow">
-          <button>a</button><button>s</button><button>d</button
-          ><button>f</button><button>g</button><button>h</button
-          ><button>j</button><button>k</button><button>l</button>
+          <button aria-label="Letter a">a</button><button aria-label="Letter s">s</button><button aria-label="Letter d">d</button
+          ><button aria-label="Letter f">f</button><button aria-label="Letter g">g</button><button aria-label="Letter h">h</button
+          ><button aria-label="Letter j">j</button><button aria-label="Letter k">k</button><button aria-label="Letter l">l</button>
         </div>
         <div class="keyrow">
-          <button>z</button><button>x</button><button>c</button
-          ><button>v</button><button>b</button><button>n</button
-          ><button>m</button>
+          <button aria-label="Letter z">z</button><button aria-label="Letter x">x</button><button aria-label="Letter c">c</button
+          ><button aria-label="Letter v">v</button><button aria-label="Letter b">b</button><button aria-label="Letter n">n</button
+          ><button aria-label="Letter m">m</button>
         </div>
       </div>
 
-      <div id="scoreboard" class="section">
-        <ol>
+      <div id="scoreboard" class="section" role="region" aria-label="Lives remaining">
+        <ol aria-label="Lives">
           <li class="tries">
-            <img src="images/liveHeart.png" height="35px" width="30px" />
+            <img src="images/liveHeart.png" alt="Live heart" height="35" width="30" />
           </li>
           <li class="tries">
-            <img src="images/liveHeart.png" height="35px" width="30px" />
+            <img src="images/liveHeart.png" alt="Live heart" height="35" width="30" />
           </li>
           <li class="tries">
-            <img src="images/liveHeart.png" height="35px" width="30px" />
+            <img src="images/liveHeart.png" alt="Live heart" height="35" width="30" />
           </li>
           <li class="tries">
-            <img src="images/liveHeart.png" height="35px" width="30px" />
+            <img src="images/liveHeart.png" alt="Live heart" height="35" width="30" />
           </li>
           <li class="tries">
-            <img src="images/liveHeart.png" height="35px" width="30px" />
+            <img src="images/liveHeart.png" alt="Live heart" height="35" width="30" />
           </li>
         </ol>
       </div>
