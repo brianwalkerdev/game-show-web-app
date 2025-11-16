@@ -1,0 +1,38 @@
+{
+  "name": "game-show-web-app",
+  "version": "1.0.0",
+  "description": "An engaging browser-based word guessing game built with HTML, CSS, and JavaScript. Players reveal hidden phrases by guessing letters with 5 lives. Features interactive keyboard, responsive design, and dynamic gameplay.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "build": "node scripts/build.js",
+    "preview": "python3 -m http.server 8080 --directory dist"
+  },
+  "keywords": [
+    "game",
+    "word-game",
+    "guessing-game",
+    "hangman",
+    "phrase-game",
+    "browser-game",
+    "javascript",
+    "html5",
+    "css3",
+    "interactive",
+    "portfolio-project"
+  ],
+  "author": {
+    "name": "Brian Walker",
+    "email": "brian@brianwalker.dev",
+    "url": "https://brianwalker.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brianwalkerdev/game-show-web-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/brianwalkerdev/game-show-web-app/issues"
+  },
+  "homepage": "https://brianwalkerdev.github.io/game-show-web-app",
+  "license": "MIT"
+}

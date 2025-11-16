@@ -1,29 +1,18 @@
-/* ---Step 1--- */
+/**
+ * Wheel of Success - Interactive Word Guessing Game
+ * Players guess letters to reveal a hidden phrase with 5 lives
+ */
 
-/* In this project, you'll create a word guessing game. Players will click letters from an onscreen keyboard to try to guess a random phrase. The player’s goal is to guess all the letters in the phrase. A player can keep choosing letters until they make five incorrect guesses. Letters guessed correctly will appear in the phrase. Letters guessed incorrectly will be counted at the bottom of the screen. */
-
-/* ---Step 2--- */
-
-// Get the element with the ID of qwerty and save it to a variable
+// DOM element references
 const qwerty = document.getElementById("qwerty");
-
-// Get the element with the ID of phrase and save it to a variable.
 const phrase = document.getElementById("phrase");
+const overlay = document.getElementById("overlay");
 
-// Create a missed variable, initialized to 0.
+// Game state
 let missed = 0;
+let phraseArray = [];
 
-/* ---Step 3--- */
-
-// Attach a event listener to the “Start Game” button to hide the start screen overlay.
-const startButton = document.querySelector(".btn__reset");
-startButton.addEventListener("click", () => {
-  overlay.style.display = "none";
-});
-
-/* ---Step 4--- */
-
-// Create a phrases array that contains at least 5 different phrases as strings.
+// Phrases for the game
 const phrases = [
   "the elephant in the room",
   "the cat in the hat",
@@ -32,25 +21,20 @@ const phrases = [
   "the fox in the forest",
 ];
 
-/* ---Step 5--- */
-
-// Create a getRandomPhraseAsArray function.
-// This function should randomly choose a phrase from the phrases array and split that phrase into a new array of characters.
-// The function should return the new array.
+/**
+ * Get a random phrase from the phrases array and split it into characters
+ * @param {Array} arr - Array of phrase strings
+ * @returns {Array} Array of characters
+ */
 function getRandomPhraseAsArray(arr) {
   const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
   return randomPhrase.split("");
 }
 
-getRandomPhraseAsArray(phrases);
-
-/* ---Step 6--- */
-
-// Create a addPhraseToDisplay function that loops through an array of characters.
-// For each character, create a list item with the character inside of it.
-// Add each list item to the #phrase ul element.
-// If the character in the array is a letter and not a space, the function should add the class “letter” to the list item.
-// If the character in the array is a space, the function should add the class “space” to the list item.
+/**
+ * Display the phrase on the page as a series of list items
+ * @param {Array} arr - Array of characters to display
+ */
 function addPhraseToDisplay(arr) {
   const phraseUl = document.querySelector("#phrase ul");
   for (let i = 0; i < arr.length; i++) {
@@ -65,17 +49,11 @@ function addPhraseToDisplay(arr) {
   }
 }
 
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(phraseArray);
-
-/* ---Step 7--- */
-
-// Create a checkLetter function.
-// This function should have one parameter: the button the player has clicked when guessing a letter.
-// The function should get all of the elements with a class of “letter”
-// The function should loop over the letters and check if they match the letter in the button the player has chosen.
-// If the letter in the button matches a letter in the phrase, the function should add the “show” class to the list item containing that letter.
-// Store the matching letter inside of a variable, and return that letter.
+/**
+ * Check if the selected letter is in the phrase
+ * @param {HTMLElement} button - The button element that was clicked
+ * @returns {string|null} The matched letter or null if not found
+ */
 function checkLetter(button) {
   const letter = button.textContent;
   const letterList = document.querySelectorAll(".letter");
@@ -89,60 +67,116 @@ function checkLetter(button) {
   return match;
 }
 
-/* ---Step 8--- */
-
-// Add an event listener to the qwerty keyboard.
-// Use event delegation to listen only to button events from the keyboard.
-// When a player chooses a letter, add the “chosen” class to that button so the same letter can’t be chosen twice.
-// Pass the button to the checkLetter function
-// If the letter was found, store the letter returned inside of a variable called letterFound.
-qwerty.addEventListener("click", (e) => {
-  const button = e.target;
-  if (button.tagName === "BUTTON") {
-    button.className = "chosen";
-    const letterFound = checkLetter(button);
-  } else {
-    return null;
-  } // end of if statement
-});
-
-/* ---Step 9--- */
-
-// Count the missed guesses in the game.
-// If the checkLetter function returns a null value, the player has guessed the wrong letter.
-// In the keyboard event listener, after checkLetter is called, write a statement to check the value of the letterFound variable.
-// If the value is null, remove one of the tries from the scoreboard.
-// When you remove a try from the scoreboard, make sure to increase the missed count by 1. Then change a liveHeart.png image to a lostHeart.png image.
+/**
+ * Remove a life from the scoreboard when a wrong letter is guessed
+ */
 function removeLife() {
   const liveHearts = document.querySelectorAll(".tries img");
-  liveHearts[missed].src = "images/lostHeart.png";
-  missed++;
+  if (missed < liveHearts.length) {
+    liveHearts[missed].src = "images/lostHeart.png";
+    liveHearts[missed].alt = "Lost heart";
+    missed++;
+  }
 }
 
-qwerty.addEventListener("click", (e) => {
+/**
+ * Check if the player has won or lost the game
+ */
+function checkWin() {
+  const letterShown = document.querySelectorAll(".show");
+  const letterTotal = document.querySelectorAll(".letter");
+  
+  if (letterShown.length === letterTotal.length) {
+    overlay.className = "win";
+    overlay.style.display = "flex";
+    overlay.children[0].textContent = "Congratulations!";
+    overlay.children[1].textContent = "Play Again";
+  } else if (missed >= 5) {
+    overlay.className = "lose";
+    overlay.style.display = "flex";
+    overlay.children[0].textContent = "Game Over";
+    overlay.children[1].textContent = "Try Again";
+  }
+}
+
+/**
+ * Reset the game to its initial state
+ */
+function resetGame() {
+  // Reset game state
+  missed = 0;
+  
+  // Clear the phrase display
+  const phraseUl = document.querySelector("#phrase ul");
+  phraseUl.innerHTML = "";
+  
+  // Reset all keyboard buttons
+  const buttons = document.querySelectorAll("#qwerty button");
+  buttons.forEach(button => {
+    button.className = "";
+    button.disabled = false;
+  });
+  
+  // Reset all hearts
+  const hearts = document.querySelectorAll(".tries img");
+  hearts.forEach(heart => {
+    heart.src = "images/liveHeart.png";
+    heart.alt = "Live heart";
+  });
+  
+  // Get new phrase and display it
+  phraseArray = getRandomPhraseAsArray(phrases);
+  addPhraseToDisplay(phraseArray);
+  
+  // Hide overlay
+  overlay.style.display = "none";
+}
+
+/**
+ * Handle letter button clicks
+ * @param {Event} e - Click event
+ */
+function handleLetterClick(e) {
   const button = e.target;
-  if (button.tagName === "BUTTON") {
+  if (button.tagName === "BUTTON" && !button.disabled) {
+    button.className = "chosen";
+    button.disabled = true;
+    
     const letterFound = checkLetter(button);
     if (letterFound === null) {
       removeLife();
     }
-  }
-  checkWin();
-});
-
-/* ---Step 10--- */
-
-// Each time the player guesses a letter, this function will check whether the game has been won or lost. At the very end of the keyboard event listener, you’ll run this function to check if the number of letters with class “show” is equal to the number of letters with class “letters”. If they’re equal, show the overlay screen with the “win” class and appropriate text. Otherwise, if the number of misses is equal to or greater than 5, show the overlay screen with the “lose” class and appropriate text.
-function checkWin() {
-  const letterShown = document.querySelectorAll(".show");
-  const letterTotal = document.querySelectorAll(".letter");
-  if (letterShown.length === letterTotal.length) {
-    overlay.className = "win";
-    overlay.style.display = "flex";
-    overlay.children[1].textContent = "You Win!";
-  } else if (missed >= 5) {
-    overlay.className = "lose";
-    overlay.style.display = "flex";
-    overlay.children[1].textContent = "You Lose!";
+    
+    checkWin();
   }
 }
+
+// Initialize the game
+function initGame() {
+  phraseArray = getRandomPhraseAsArray(phrases);
+  addPhraseToDisplay(phraseArray);
+  
+  // Set up event listeners
+  const startButton = document.querySelector(".btn__reset");
+  startButton.addEventListener("click", resetGame);
+  
+  qwerty.addEventListener("click", handleLetterClick);
+  
+  // Add keyboard support
+  document.addEventListener("keydown", (e) => {
+    const key = e.key.toLowerCase();
+    if (/^[a-z]$/.test(key)) {
+      const button = document.querySelector(`#qwerty button:not(.chosen):not([disabled])`);
+      const allButtons = document.querySelectorAll("#qwerty button");
+      for (let btn of allButtons) {
+        if (btn.textContent === key && !btn.disabled) {
+          btn.click();
+          break;
+        }
+      }
+    }
+  });
+}
+
+// Start the game when the page loads
+initGame();
