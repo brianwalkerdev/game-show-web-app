@@ -5,6 +5,8 @@ An interactive browser-based word guessing game where players reveal hidden phra
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://brianwalkerdev.github.io/game-show-web-app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+![Wheel of Success - Project Thumbnail](https://github.com/user-attachments/assets/c6600268-1701-446e-8f3c-50968a0447ac)
+
 ## 🎮 Live Demo
 
 **[Play the Game →](https://brianwalkerdev.github.io/game-show-web-app)**
